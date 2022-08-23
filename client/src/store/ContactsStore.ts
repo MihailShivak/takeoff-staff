@@ -1,10 +1,16 @@
+import {makeAutoObservable} from 'mobx';
+
 export default class ContactsStore{
-   private _contacts = [];
-   get contacts(){
-      return this._contacts;
-   }
-   set contacts(contacts){
-      this._contacts = contacts
+   constructor(){
+      this.contacts = [];
+      makeAutoObservable(this)
    }
 
+   set contacts(contacts){
+      this.contacts = contacts
+   }
+
+   get contacts(): any{
+      return this.contacts;
+   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 
-const ContactItem = (contact: any) => {
+const ContactItem = ({contact}: any) => {
    return(
       <Col>
          <Card>

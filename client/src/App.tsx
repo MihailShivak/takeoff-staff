@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
-import './App.css';
+import './style/App.css';
 import { Context } from "./index";
 import { check } from "./http/userAPI";
 import { Spinner } from "react-bootstrap";
@@ -13,8 +13,8 @@ const App = observer(() => {
 
   useEffect(() => {
     check().then(data => {
-      user.setUser(true)
-      user.setIsAuth(true)
+      user.user(true)
+      user.isAuth(true)
     }).finally(() => setLoading(false))
   }, [])
 

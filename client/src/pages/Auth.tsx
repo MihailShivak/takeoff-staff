@@ -3,8 +3,9 @@ import {Container, Card, Form, Row, Button} from "react-bootstrap";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {Context} from "../index";
 import { observer } from "mobx-react-lite";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../unils/consts';
+import { CONTACTS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../unils/consts';
 import { login, registration } from '../http/userAPI';
+import "../style/auth.css"
 
 const Auth = observer(() => {
   const {user} = useContext(Context)
@@ -22,9 +23,9 @@ const Auth = observer(() => {
       } else {
         data = await registration(username, password)
       }
-      user.setUser(user)
-      user.setIsAuth(true)
-      history(LOGIN_ROUTE)
+      user.user(user)
+      user.isAuth(true)
+      history(CONTACTS_ROUTE)
     } catch (e) {
       
     }
@@ -32,27 +33,33 @@ const Auth = observer(() => {
 
   return (
     <div className="Auth">
-      <Container>
-        <Card>
-          <h2>{isLogin ? "AUTHORIZATION" : "REGISTRATION"}</h2>
-          <Form>
-            <Form.Control placeholder='username' value={username} onChange={e => setUsername(e.target.value)}/>
-            <Form.Control placeholder='password' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
-            <Row>
-              <Button onClick={click}>{isLogin ? "LOG IN" : "REGISTRATION"}</Button>
-                {isLogin ?
-                  <div>
-                    no account ? <NavLink to={REGISTRATION_ROUTE}>Register</NavLink>
-                  </div>
-                  :
-                  <div>
-                    have an account ? <NavLink to={LOGIN_ROUTE}>Log in</NavLink>
-                  </div>
-                }
-            </Row>
-          </Form>
-        </Card>
-      </Container>
+      <Card className='card'>
+        <h2 className='authorization'>{isLogin ? "AUTHORIZATION" : "REGISTRATION"}</h2>
+        <Form className='form'>
+          <Form.Control className='username' placeholder='username' value={username} onChange={e => setUsername(e.target.value)}/>
+          <Form.Control className='password' placeholder='password' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
+          <Row className='buttons'>
+            <Button className='sign_in' onClick={click}>
+              {isLogin ? 
+              <NavLink className="link" style={{color: 'white'}} to={CONTACTS_ROUTE}>
+                LOG IN
+              </NavLink>
+              : 
+              "REGISTRATION"
+              }
+              </Button>
+              {isLogin ?
+                <div className='no_account'>
+                  no account ? <NavLink className="link" to={REGISTRATION_ROUTE}>Register</NavLink>
+                </div>
+                :
+                <div className='no_account'>
+                  have an account ? <NavLink className="link" to={LOGIN_ROUTE}>Log in</NavLink>
+                </div>
+              }
+          </Row>
+        </Form>
+      </Card>
     </div>
   );
 })

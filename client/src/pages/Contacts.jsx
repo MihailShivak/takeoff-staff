@@ -9,11 +9,15 @@ import { fetchContact } from "../http/contactsAPI";
 const Contacts = observer(() => {
    const {contact} = useContext(Context)
    useEffect(() => {
-      fetchContact().then(data => contact.setContact(data))
-   }, [])
+      fetchContact(contact.name).then(data => {
+         contact.setContact(data.rows)
+      })
+   }, [contact.name])
    return(
-      <Container>
-         <ContactsList/>
+      <Container className="container_contacts">
+         <div className="content">
+            <ContactsList/>
+         </div>
       </Container>
    )
 })

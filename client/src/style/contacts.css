@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap');
+
+.container_contacts{
+   display: flex;
+   text-align: center;
+   justify-content: center;
+   margin-top: 150px;
+   font-family: 'Rajdhani', sans-serif;
+}
